@@ -1,4 +1,3 @@
-// ============================================
 // Mobile Menu Toggle
 // ============================================
 const mobileMenuBtn = document.getElementById('mobileMenuBtn');
@@ -774,4 +773,6 @@ style.textContent = `
     }
 `;
 document.head.appendChild(style);
+ 
+
 
