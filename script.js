@@ -1,1253 +1,777 @@
-/* Reset and Base Styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+// ============================================
+// Mobile Menu Toggle
+// ============================================
+const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+const navLinks = document.getElementById('navLinks');
+
+if (mobileMenuBtn) {
+    mobileMenuBtn.addEventListener('click', () => {
+        navLinks.classList.toggle('show');
+    });
 }
 
-:root {
-    /* Light color palette */
-    --primary-color: #f8b042;
-    --secondary-color: #e67e22;
-    --accent-color: #27ae60;
-    --text-color: #2c3e50;
-    --light-text: #7f8c8d;
-    --bg-color: #fef9f4;
-    --light-bg: #fff5eb;
-    --white: #ffffff;
-    --shadow: 0 5px 20px rgba(0,0,0,0.05);
-    --border-radius: 12px;
-}
+// Close mobile menu when clicking a link
+document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+        navLinks.classList.remove('show');
+    });
+});
 
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    font-family: 'Inter', sans-serif;
-    color: var(--text-color);
-    background-color: var(--bg-color);
-    line-height: 1.6;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-/* Typography */
-h1, h2, h3, h4, h5, h6 {
-    font-family: 'Playfair Display', serif;
-    font-weight: 700;
-    line-height: 1.2;
-}
-
-.section {
-    padding: 80px 0;
-}
-
-.section-title {
-    text-align: center;
-    font-size: 2.5rem;
-    color: var(--text-color);
-    margin-bottom: 50px;
-    position: relative;
-}
-
-.section-title::after {
-    content: '';
-    display: block;
-    width: 60px;
-    height: 3px;
-    background: var(--primary-color);
-    margin: 20px auto;
-}
-
-.bg-light {
-    background-color: var(--light-bg);
-}
-
-/* Buttons */
-.btn {
-    display: inline-block;
-    padding: 12px 30px;
-    border-radius: 50px;
-    text-decoration: none;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    border: none;
-    font-size: 1rem;
-}
-
-.btn-primary {
-    background-color: var(--primary-color);
-    color: var(--white);
-}
-
-.btn-primary:hover {
-    background-color: var(--secondary-color);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow);
-}
-
-.btn-outline {
-    background-color: transparent;
-    color: var(--primary-color);
-    border: 2px solid var(--primary-color);
-}
-
-.btn-outline:hover {
-    background-color: var(--primary-color);
-    color: var(--white);
-    transform: translateY(-2px);
-}
-
-/* Top Bar */
-.top-bar {
-    background-color: var(--white);
-    padding: 10px 0;
-    border-bottom: 1px solid rgba(0,0,0,0.05);
-}
-
-.top-bar-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 15px;
-}
-
-.contact-info span {
-    margin-right: 25px;
-    color: var(--light-text);
-    font-size: 0.9rem;
-}
-
-.contact-info i {
-    color: var(--primary-color);
-    margin-right: 8px;
-}
-
-.social-icons a {
-    color: var(--light-text);
-    margin-left: 15px;
-    transition: color 0.3s ease;
-}
-
-.social-icons a:hover {
-    color: var(--primary-color);
-}
-
-/* Navigation */
-header {
-    background-color: var(--white);
-    box-shadow: var(--shadow);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 0;
-}
-
-.logo {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.8rem;
-    font-weight: 900;
-    color: var(--text-color);
-}
-
-.logo span {
-    color: var(--primary-color);
-}
-
-.nav-links {
-    display: flex;
-    list-style: none;
-    gap: 30px;
+// ============================================
+// Menu Items Data
+// ============================================
+const menuItems = [
+    {
+        id: 6,
+        name: 'Rfissa',
+        description: 'Slow‑cooked chicken with msemen and lentils',
+        price: 140,
+        priceText: '140 MAD',
+        image: 'img/rfisa.jpg',
+        badge: 'Homemade'
+    },
+    {
+        id: 2,
+        name: 'Lamb with Prunes',
+        description: 'Slow‑cooked lamb with Moroccan spices',
+        price: 150,
+        priceText: '150 MAD',
+        image: 'img/lham bar9o9.jpg',
+        badge: 'Traditional'
+    },
+    {
+        id: 3,
+        name: 'Vegetable Couscous',
+        description: 'Steamed semolina with seasonal vegetables',
+        price: 100,
+        priceText: '100 MAD',
+        image: 'img/koskos.jpg',
+        badge: 'Traditional'
+    }, 
+    {
+        id: 9,
+        name: 'Sfa',
+        description: 'Delicious Moroccan specialty dish',
+        price: 160,
+        priceText: '160 MAD',
+        image: 'img/sfa.jpg',
+        badge: 'Special'
+    },
+    {
+        id: 5,
+        name: 'Harira Soup',
+        description: 'Authentic Moroccan soup with lentils & herbs',
+        price: 80,
+        priceText: '80 MAD',
+        image: 'img/harira.jpg',
+        badge: 'Classic'
+    },
+    {
+        id: 1,
+        name: 'Chicken Tagine',
+        description: 'Tender chicken tagine with preserved olives',
+        price: 120,
+        priceText: '120 MAD',
+        image: 'img/tagin djaj.jpg',
+        badge: 'Signature'
+    },
+    {
+        id: 4,
+        name: 'Chicken Pastilla',
+        description: 'Layered pastry with chicken, almonds, and cinnamon',
+        price: 150,
+        priceText: '150 MAD',
+        image: 'img/bastila djaj.jpg',
+        badge: 'Special'
+    },
+    {
+        id: 8,
+        name: 'Fish Pastilla',
+        description: 'Layered pastry with fish, almonds, and Moroccan spices',
+        price: 160,
+        priceText: '160 MAD',
+        image: 'img/bastila hot.jpg',
+        badge: 'Special'
+    },
+    {
+        id: 7,
+        name: 'Tangya',
+        description: 'Authentic Marrakech-style Tangia, slow-cooked with traditional spices',
+        price: 130,
+        priceText: '130 MAD',
+        image: 'img/tangiya.jpg',
+        badge: 'Special'
+    },
     
-}
-
-.nav-links a {
-    text-decoration: none;
-    color: var(--text-color);
-    font-weight: 500;
-    transition: color 0.3s ease;
-    position: relative;
-}
-
-.nav-links a::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background-color: var(--primary-color);
-    transition: width 0.3s ease;
-}
-
-.nav-links a:hover::after,
-.nav-links a.active::after {
-    width: 100%;
-}
-
-.mobile-menu {
-    display: none;
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    color: var(--text-color);
-    cursor: pointer;
-}
-
-/* Hero Section */
-
-.hero {
-    min-height: 600px;
-    height: 100vh;
-    background-image: linear-gradient(
-        rgba(0, 0, 0, 0.8),  
-        rgba(0, 0, 0, 0.8)
-    ), url('img/aaaa.jpg');  
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;  
-    display: flex;
-    align-items: center;
-    text-align: center;
-    position: relative;
-    color: white;  
-}
-
-
-.hero h1 {
-    font-size: 6rem;
-    margin-bottom: 20px;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-}
-
-.dar {
-    color: #2c3e50; 
-}
-
-.tlaytmas {
-    color: #f8b042;
-}
-.hero h1 span {
-    margin: 0 8px;
-}
-
-
-.hero .subtitle {
-    font-size: 1rem;
-    color: rgba(255,255,255,0.9);  
-    margin-bottom: 40px;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-}
-
-
-.hero .btn-outline {
-    border-color: white;
-    color: white;
-}
-
-.hero .btn-outline:hover {
-    background-color: white;
-    color: var(--primary-color);
-}
-/*.hero {
-    min-height: 600px;
-    background: linear-gradient(135deg, var(--light-bg) 0%, var(--white) 100%);
-    display: flex;
-    align-items: center;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-}
-
-.hero::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    right: -50%;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle, rgba(248,176,66,0.1) 0%, transparent 70%);
-    border-radius: 50%;
-}
-
-.hero-content {
-    max-width: 800px;
-    margin: 0 auto;
-    position: relative;
-    z-index: 1;
-}
-
-.hero h1 {
-    font-size: 4rem;
-    color: var(--text-color);
-    margin-bottom: 20px;
-}
-
-.hero .subtitle {
-    font-size: 1.2rem;
-    color: var(--light-text);
-    margin-bottom: 40px;
-}
-
-.hero-buttons {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-}*/
-
-/* About Section */
-.about-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 50px;
-    align-items: center;
-}
-
-.about-text h3 {
-    font-size: 2rem;
-    margin-bottom: 20px;
-    color: var(--text-color);
-}
-
-.about-text p {
-    color: var(--light-text);
-    margin-bottom: 20px;
-    line-height: 1.8;
-}
-
-.features {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    margin-top: 30px;
-}
-
-.feature {
-    text-align: center;
-    padding: 20px;
-    background: var(--white);
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow);
-    transition: transform 0.3s ease;
-}
-
-.feature:hover {
-    transform: translateY(-5px);
-}
-
-.feature i {
-    font-size: 2rem;
-    color: var(--primary-color);
-    margin-bottom: 10px;
-}
-
-.feature span {
-    display: block;
-    font-weight: 500;
-    color: var(--text-color);
-}
-
-.about-image img {
-    width: 100%;
-    height: 480px;
-    border-radius: 50px;
-    box-shadow: var(--shadow);
-}
-
-/* Menu Section */
-.menu-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
-}
-
-.menu-item {
-    background: var(--white);
-    border-radius: var(--border-radius);
-    overflow: hidden;
-    box-shadow: var(--shadow);
-    transition: all 0.3s ease;
-}
-
-.menu-item:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-}
-
-.menu-item-image {
-    width: 100%;
-    height: 400px;
-    object-fit: cover;
-}
-
-.menu-item-content {
-    padding: 20px;
-}
-
-.menu-item h3 {
-    font-size: 1.3rem;
-    margin-bottom: 10px;
-    color: var(--text-color);
-}
-
-.menu-item p {
-    color: var(--light-text);
-    font-size: 0.9rem;
-    margin-bottom: 15px;
-}
-
-.menu-item-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.price {
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: var(--primary-color);
-}
-
-.badge {
-    background-color: var(--light-bg);
-    color: var(--primary-color);
-    padding: 5px 10px;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    font-weight: 600;
-}
-
-/* Gallery Section */
-.gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-}
-
-.gallery-item {
-    position: relative;
-    border-radius: var(--border-radius);
-    overflow: hidden;
-    aspect-ratio: 1;
-    cursor: pointer;
-}
-
-.gallery-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-}
-
-.gallery-item:hover img {
-    transform: scale(1.1);
-}
-
-.gallery-overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(transparent, rgba(0,0,0,0.7));
-    color: var(--white);
-    padding: 20px;
-    transform: translateY(100%);
-    transition: transform 0.3s ease;
-}
-
-.gallery-item:hover .gallery-overlay {
-    transform: translateY(0);
-}
-
-/* Contact Section */
-/*.contact-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 50px;
-    align-items: stretch; 
-}
-
-
-.contact-info {
-    background: var(--white);
-    padding: 40px;
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
-}
-
-.contact-info .contact-item {
-    display: flex;
-    gap: 20px;
-}
-
-
-.contact-item i {
-    font-size: 1.5rem;
-    color: var(--primary-color);
-    min-width: 40px;
-}
-
-
-.contact-item h3 {
-    font-size: 1.2rem;
-    margin-bottom: 5px;
-}
-
-.contact-item p {
-    color: var(--light-text);
-    line-height: 1.6;
-}
-
-
-.contact-form {
-    background: var(--white);
-    padding: 40px;
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow);
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.contact-form h3 {
-    font-size: 1.5rem;
-    margin-bottom: 30px;
-}
-
-
-.form-group {
-    margin-bottom: 20px;
-}
-
-.form-group input,
-.form-group textarea {
-    width: 100%;
-    padding: 12px 15px;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    font-family: 'Inter', sans-serif;
-    font-size: 1rem;
-    transition: border-color 0.3s ease;
-}
-
-.form-group input:focus,
-.form-group textarea:focus {
-    outline: none;
-    border-color: var(--primary-color);
-}*/
-
-.contact-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 50px;
-}
-
-.contact-info .contact-item {
-    display: flex;
-    gap: 20px;
-    margin-bottom: 30px;
-}
-
-.contact-item i {
-    font-size: 1.5rem;
-    color: var(--primary-color);
-    min-width: 40px;
-}
-
-.contact-item h3 {
-    font-size: 1.2rem;
-    margin-bottom: 5px;
-}
-
-.contact-item p {
-    color: var(--light-text);
-    line-height: 1.6;
-}
-
-.contact-form {
-    background: var(--white);
-    padding: 40px;
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow);
-   
-}
-
-.contact-form h3 {
-    font-size: 1.5rem;
-    margin-bottom: 30px;
-}
-
-.form-group {
-    margin-bottom: 20px;
-}
-
-.form-group input,
-.form-group textarea {
-    width: 100%;
-    padding: 12px 15px;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    font-family: 'Inter', sans-serif;
-    font-size: 1rem;
-    transition: border-color 0.3s ease;
-}
-
-.form-group input:focus,
-.form-group textarea:focus {
-    outline: none;
-    border-color: var(--primary-color);
-}
-
-/* Footer */
-footer {
-    background-color: var(--white);
-    padding-top: 60px;
-    border-top: 1px solid rgba(0,0,0,0.05);
-}
-
-.footer-content {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
-    gap: 40px;
-    margin-bottom: 40px;
-}
-
-.footer-section h3 {
-    font-size: 1.2rem;
-    margin-bottom: 20px;
-    color: var(--text-color);
-}
-
-.footer-section p {
-    color: var(--light-text);
-    line-height: 1.6;
-}
-
-.footer-section ul {
-    list-style: none;
-}
-
-.footer-section ul li {
-    margin-bottom: 10px;
-}
-
-.footer-section ul a {
-    text-decoration: none;
-    color: var(--light-text);
-    transition: color 0.3s ease;
-}
-
-.footer-section ul a:hover {
-    color: var(--primary-color);
-}
-
-.social-links {
-    display: flex;
-    gap: 15px;
-}
-
-.social-links a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    background-color: var(--light-bg);
-    color: var(--primary-color);
-    border-radius: 50%;
-    transition: all 0.3s ease;
-}
-
-.social-links a:hover {
-    background-color: var(--primary-color);
-    color: var(--white);
-    transform: translateY(-3px);
-}
-
-.footer-bottom {
-    text-align: center;
-    padding: 20px 0;
-    border-top: 1px solid rgba(0,0,0,0.05);
-    color: var(--light-text);
-    font-size: 0.9rem;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .nav-links {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background: var(--white);
-        flex-direction: column;
-        padding: 20px;
-        box-shadow: var(--shadow);
+];
+
+// ============================================
+// Gallery Items Data
+// ============================================
+const galleryItems = [
+    {
+        image: 'img/1.jpg',
+        title: 'Traditional moroccan sweet'
+    },
+    {
+        image: 'img/2.jpg',
+        title: 'Moroccan Tea'
+    },
+    {
+        image: 'img/3.jpg',
+        title: 'Moroccan pancakes'
+    },
+    {
+        image: 'img/jami3 twajn.jpg',
+        title: 'Tagine'
+    },
+    {
+        image: 'img/5.jpg',
+        title: 'breakfast morocco'
+    },
+    {
+        image: 'img/6.jpg',
+        title: 'Restaurant Interior'
     }
+];
 
-    .nav-links.show {
-        display: flex;
-    }
+// ============================================
+// Shopping Cart Functionality
+// ============================================
+let cart = [];
+const DELIVERY_FEE = 15; // رسوم التوصيل 15 درهم
 
-    .mobile-menu {
-        display: block;
-    }
-
-    .hero h1 {
-        font-size: 2.5rem;
-    }
-
-    .about-content,
-    .contact-content {
-        grid-template-columns: 1fr;
-    }
-
-    .features {
-        grid-template-columns: 1fr;
-    }
-
-    .footer-content {
-        grid-template-columns: 1fr;
-    }
-
-    .hero-buttons {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .btn {
-        width: 100%;
-        max-width: 250px;
-    }
-}
-/* ========== NEW STYLES FOR CART & BOOKING ========== */
-
-/* Cart Icon */
-#cartIcon {
-    position: relative;
-    margin-right: 15px;
-}
-
-#cartCount {
-    position: absolute;
-    top: -8px;
-    right: -8px;
-    background: var(--primary-color);
-    color: white;
-    border-radius: 50%;
-    padding: 2px 6px;
-    font-size: 0.7rem;
-    display: none;
-}
-
-/* Add to Cart Button */
-.add-to-cart-btn {
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    padding: 8px 15px;
-    border-radius: 25px;
-    cursor: pointer;
-    font-size: 0.9rem;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    width: 100%;
-    margin-top: 10px;
-}
-
-.add-to-cart-btn:hover {
-    background-color: var(--secondary-color);
-    transform: translateY(-2px);
-}
-
-/* Modal Styles */
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed;
-    z-index: 2000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.5);
-    animation: fadeIn 0.3s ease;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-.modal-content {
-    background-color: var(--white);
-    margin: 5% auto;
-    padding: 30px;
-    border-radius: var(--border-radius);
-    width: 90%;
-    max-width: 600px;
-    max-height: 80vh;
-    overflow-y: auto;
-    position: relative;
-    animation: slideIn 0.3s ease;
-}
-
-@keyframes slideIn {
-    from {
-        transform: translateY(-50px);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
+// Load cart from localStorage
+function loadCart() {
+    const savedCart = localStorage.getItem('cart');
+    if (savedCart) {
+        cart = JSON.parse(savedCart);
+        updateCartCount();
     }
 }
 
-.close-modal {
-    position: absolute;
-    top: 15px;
-    right: 25px;
-    font-size: 30px;
-    font-weight: bold;
-    color: var(--light-text);
-    cursor: pointer;
-    transition: color 0.3s ease;
+// Save cart to localStorage
+function saveCart() {
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCartCount();
 }
 
-.close-modal:hover {
-    color: var(--primary-color);
+// Update cart count in the icon
+function updateCartCount() {
+    const cartCount = document.getElementById('cartCount');
+    if (cartCount) {
+        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+        if (totalItems > 0) {
+            cartCount.textContent = totalItems;
+            cartCount.style.display = 'inline';
+        } else {
+            cartCount.style.display = 'none';
+        }
+    }
 }
 
-/* Cart Items */
-.cart-item {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    padding: 15px 0;
-    border-bottom: 1px solid #eee;
-}
-
-.cart-item-image {
-    width: 60px;
-    height: 60px;
-    border-radius: 10px;
-    object-fit: cover;
-}
-
-.cart-item-details {
-    flex: 1;
-}
-
-.cart-item-details h4 {
-    font-size: 1rem;
-    margin-bottom: 5px;
-    color: var(--text-color);
-}
-
-.cart-item-price {
-    color: var(--primary-color);
-    font-weight: 600;
-    font-size: 0.9rem;
-}
-
-.cart-item-quantity {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.quantity-btn {
-    background-color: var(--light-bg);
-    border: none;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--text-color);
-    transition: all 0.3s ease;
-}
-
-.quantity-btn:hover {
-    background-color: var(--primary-color);
-    color: white;
-}
-
-.quantity-value {
-    font-weight: 600;
-    min-width: 20px;
-    text-align: center;
-}
-
-.remove-item {
-    color: #e74c3c;
-    cursor: pointer;
-    font-size: 1.2rem;
-    transition: color 0.3s ease;
-}
-
-.remove-item:hover {
-    color: #c0392b;
-}
-
-.cart-total {
-    margin: 20px 0;
-    padding-top: 20px;
-    border-top: 2px solid #eee;
-    text-align: right;
-}
-
-.cart-total h3 {
-    color: var(--text-color);
-    margin-bottom: 5px;
-}
-
-#cartTotal, #cartSubtotal {
-    color: var(--primary-color);
-    font-size: 1.5rem;
-}
-
-#deliveryFee {
-    color: var(--text-color);
-    font-size: 1.2rem;
-}
-
-/* Checkout Form (hidden by default) */
-#checkoutForm {
-    display: none;
-    margin-top: 20px;
-    padding-top: 20px;
-    border-top: 2px solid #eee;
-}
-
-#checkoutForm.active {
-    display: block;
-    animation: fadeIn 0.3s ease;
-}
-
-/* Delivery Form Styles */
-.delivery-form {
-    background-color: var(--light-bg);
-    padding: 20px;
-    border-radius: var(--border-radius);
-    margin: 20px 0;
-}
-
-.delivery-form h3 {
-    margin-bottom: 15px;
-    color: var(--text-color);
-}
-
-.form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-}
-
-/* Booking Form (in Contact section) */
-.booking-form {
-    background-color: var(--white);
-    padding: 30px;
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow);
-    margin-top: 30px;
-}
-
-.booking-form h3 {
-    font-size: 1.5rem;
-    margin-bottom: 20px;
-    color: var(--text-color);
-}
-
-.booking-form .form-group {
-    margin-bottom: 15px;
-}
-
-.booking-form input,
-.booking-form select,
-.booking-form textarea {
-    width: 100%;
-    padding: 12px 15px;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    font-family: 'Inter', sans-serif;
-    font-size: 1rem;
-}
-
-.booking-form input:focus,
-.booking-form select:focus,
-.booking-form textarea:focus {
-    outline: none;
-    border-color: var(--primary-color);
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .modal-content {
-        margin: 10% auto;
-        padding: 20px;
-        width: 95%;
+// Add item to cart
+function addToCart(itemId) {
+    const item = menuItems.find(i => i.id === itemId);
+    if (!item) return;
+    
+    const existingItem = cart.find(i => i.id === itemId);
+    
+    if (existingItem) {
+        existingItem.quantity += 1;
+    } else {
+        cart.push({
+            id: item.id,
+            name: item.name,
+            price: item.price,
+            image: item.image,
+            quantity: 1
+        });
     }
     
-    .form-row {
-        grid-template-columns: 1fr;
+    saveCart();
+    showNotification(`${item.name} added to cart!`, 'default');
+}
+
+// Remove item from cart
+function removeFromCart(itemId) {
+    cart = cart.filter(item => item.id !== itemId);
+    saveCart();
+    displayCart();
+}
+
+// Update item quantity
+function updateQuantity(itemId, change) {
+    const item = cart.find(i => i.id === itemId);
+    if (item) {
+        item.quantity += change;
+        if (item.quantity <= 0) {
+            removeFromCart(itemId);
+        } else {
+            saveCart();
+            displayCart();
+        }
+    }
+}
+
+// Calculate cart subtotal
+function calculateSubtotal() {
+    return cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+}
+
+// Calculate total with delivery
+function calculateTotal() {
+    return calculateSubtotal() + DELIVERY_FEE;
+}
+
+// Display cart items in modal
+function displayCart() {
+    const cartContainer = document.getElementById('cartItemsContainer');
+    const cartSubtotalSpan = document.getElementById('cartSubtotal');
+    const cartTotalSpan = document.getElementById('cartTotal');
+    const deliveryFeeSpan = document.getElementById('deliveryFee');
+    
+    if (!cartContainer || !cartSubtotalSpan || !cartTotalSpan) return;
+    
+    if (cart.length === 0) {
+        cartContainer.innerHTML = '<p style="text-align: center; color: var(--light-text);">Your cart is empty.</p>';
+        cartSubtotalSpan.textContent = '0.00';
+        if (deliveryFeeSpan) deliveryFeeSpan.textContent = DELIVERY_FEE.toFixed(2);
+        cartTotalSpan.textContent = DELIVERY_FEE.toFixed(2);
+        return;
     }
     
-    .cart-item {
-        flex-wrap: wrap;
+    let html = '';
+    cart.forEach(item => {
+        html += `
+            <div class="cart-item">
+                <img src="${item.image}" alt="${item.name}" class="cart-item-image" onerror="this.src='https://via.placeholder.com/60'">
+                <div class="cart-item-details">
+                    <h4>${item.name}</h4>
+                    <span class="cart-item-price">${item.price} MAD</span>
+                </div>
+                <div class="cart-item-quantity">
+                    <button class="quantity-btn" onclick="updateQuantity(${item.id}, -1)">-</button>
+                    <span class="quantity-value">${item.quantity}</span>
+                    <button class="quantity-btn" onclick="updateQuantity(${item.id}, 1)">+</button>
+                </div>
+                <i class="fas fa-trash remove-item" onclick="removeFromCart(${item.id})"></i>
+            </div>
+        `;
+    });
+    
+    cartContainer.innerHTML = html;
+    const subtotal = calculateSubtotal();
+    cartSubtotalSpan.textContent = subtotal.toFixed(2);
+    if (deliveryFeeSpan) deliveryFeeSpan.textContent = DELIVERY_FEE.toFixed(2);
+    cartTotalSpan.textContent = calculateTotal().toFixed(2);
+}
+
+// ============================================
+// Show Notification (مطورة لدعم الأنواع)
+// ============================================
+function showNotification(message, type = 'default') {
+    // نشوفو واش كاينة نوتيفيكيشن قديمة و نحيدوها
+    const oldNotification = document.querySelector('.notification');
+    if (oldNotification) {
+        oldNotification.remove();
     }
     
-    .cart-item-image {
-        width: 50px;
-        height: 50px;
+    const notification = document.createElement('div');
+    notification.className = 'notification';
+    
+    let bgColor = 'var(--primary-color)';
+    if (type === 'success') bgColor = '#27ae60';
+    else if (type === 'error') bgColor = '#e74c3c';
+    
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background-color: ${bgColor};
+        color: white;
+        padding: 15px 25px;
+        border-radius: 8px;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        z-index: 3000;
+        animation: slideInRight 0.3s ease;
+        font-weight: 500;
+    `;
+    notification.textContent = message;
+    
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        notification.style.animation = 'slideOutRight 0.3s ease';
+        setTimeout(() => {
+            if (notification.parentNode) {
+                document.body.removeChild(notification);
+            }
+        }, 300);
+    }, 3000);
+}
+
+// ============================================
+// Cart Modal Functionality
+// ============================================
+const cartIcon = document.getElementById('cartIcon');
+const cartModal = document.getElementById('cartModal');
+const closeModal = document.querySelector('.close-modal');
+const checkoutBtn = document.getElementById('checkoutBtn');
+const backToCartBtn = document.getElementById('backToCartBtn');
+const checkoutForm = document.getElementById('checkoutForm');
+
+if (cartIcon) {
+    cartIcon.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (cartModal) {
+            displayCart();
+            cartModal.style.display = 'block';
+            // إخفاء الفورم وإظهار زر checkout عند فتح السلة
+            if (checkoutForm) checkoutForm.style.display = 'none';
+            if (checkoutBtn) checkoutBtn.style.display = 'block';
+            if (backToCartBtn) backToCartBtn.style.display = 'none';
+        }
+    });
+}
+
+if (closeModal) {
+    closeModal.addEventListener('click', () => {
+        cartModal.style.display = 'none';
+    });
+}
+
+window.addEventListener('click', (e) => {
+    if (e.target === cartModal) {
+        cartModal.style.display = 'none';
+    }
+});
+
+// Checkout button - يظهر فورم المعلومات تحت السلة
+if (checkoutBtn) {
+    checkoutBtn.addEventListener('click', () => {
+        if (cart.length === 0) {
+            alert('Your cart is empty!');
+            return;
+        }
+        
+        // إظهار فورم المعلومات تحت السلة مباشرة
+        if (checkoutForm) {
+            checkoutForm.style.display = 'block';
+            checkoutForm.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+        
+        // إخفاء زر checkout وإظهار زر العودة
+        checkoutBtn.style.display = 'none';
+        if (backToCartBtn) backToCartBtn.style.display = 'block';
+    });
+}
+
+// Back to cart button - يخفي فورم المعلومات
+if (backToCartBtn) {
+    backToCartBtn.addEventListener('click', () => {
+        if (checkoutForm) checkoutForm.style.display = 'none';
+        checkoutBtn.style.display = 'block';
+        backToCartBtn.style.display = 'none';
+    });
+}
+
+// Delivery form submission - إرسال الطلب عبر WhatsApp
+const deliveryForm = document.getElementById('deliveryForm');
+if (deliveryForm) {
+    deliveryForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        if (cart.length === 0) {
+            alert('Your cart is empty!');
+            return;
+        }
+        
+        // جمع معلومات العميل
+        const customerName = document.getElementById('customerName').value;
+        const customerPhone = document.getElementById('customerPhone').value;
+        const customerAddress = document.getElementById('customerAddress').value;
+        const orderNotes = document.getElementById('orderNotes').value;
+        
+        // التحقق من المعلومات
+        if (!customerName || !customerPhone || !customerAddress) {
+            alert('Please fill in all required fields');
+            return;
+        }
+        
+        // تكوين رسالة الطلب
+        let orderMessage = `🍽️ *New Order from Dar Tlaytmas*\n\n`;
+        orderMessage += `👤 *Customer:* ${customerName}\n`;
+        orderMessage += `📞 *Phone:* ${customerPhone}\n`;
+        orderMessage += `📍 *Address:* ${customerAddress}\n`;
+        
+        if (orderNotes) {
+            orderMessage += `📝 *Notes:* ${orderNotes}\n`;
+        }
+        
+        orderMessage += `\n🛒 *Order Items:*\n`;
+        
+        cart.forEach((item, index) => {
+            orderMessage += `${index + 1}. ${item.name} x${item.quantity} - ${item.price * item.quantity} MAD\n`;
+        });
+        
+        const subtotal = calculateSubtotal();
+        orderMessage += `\n💰 *Subtotal:* ${subtotal.toFixed(2)} MAD`;
+        orderMessage += `\n🚚 *Delivery:* ${DELIVERY_FEE.toFixed(2)} MAD`;
+        orderMessage += `\n💵 *Total:* ${calculateTotal().toFixed(2)} MAD`;
+        
+        orderMessage += `\n\n⏱️ *Estimated delivery time:* 45-60 minutes`;
+        orderMessage += `\n✅ Thank you for choosing Dar Tlaytmas!`;
+        
+        // تشفير الرسالة وإرسالها عبر WhatsApp
+        const phoneNumber = '212600000000'; // ضع هنا رقم الواتساب الخاص بالمطعم
+        const encodedMessage = encodeURIComponent(orderMessage);
+        const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+        
+        // فتح WhatsApp في نافذة جديدة
+        window.open(whatsappUrl, '_blank');
+        
+        // إفراغ السلة بعد الطلب
+        cart = [];
+        saveCart();
+        
+        // إغلاق المودال
+        cartModal.style.display = 'none';
+        
+        // إظهار رسالة نجاح
+        showNotification('Order sent successfully! Check WhatsApp to confirm.', 'success');
+        
+        // إعادة تعيين الفورم
+        deliveryForm.reset();
+        
+        // إعادة ضبط حالة الأزرار
+        if (checkoutForm) checkoutForm.style.display = 'none';
+        if (checkoutBtn) checkoutBtn.style.display = 'block';
+        if (backToCartBtn) backToCartBtn.style.display = 'none';
+    });
+}
+
+// ============================================
+// Load Menu Items
+// ============================================
+function loadMenuItems() {
+    const menuGrid = document.getElementById('menuGrid');
+    if (!menuGrid) return;
+
+    menuGrid.innerHTML = menuItems.map(item => `
+        <div class="menu-item">
+            <img src="${item.image}" alt="${item.name}" class="menu-item-image" loading="lazy" onerror="this.src='https://via.placeholder.com/300x200'">
+            <div class="menu-item-content">
+                <h3>${item.name}</h3>
+                <p>${item.description}</p>
+                <div class="menu-item-footer">
+                    <span class="price">${item.priceText}</span>
+                    <span class="badge">${item.badge}</span>
+                </div>
+                <button class="add-to-cart-btn" onclick="addToCart(${item.id})">
+                    <i class="fas fa-shopping-cart"></i> Add to Cart
+                </button>
+            </div>
+        </div>
+    `).join('');
+}
+
+// ============================================
+// Load Gallery Items
+// ============================================
+function loadGalleryItems() {
+    const galleryGrid = document.getElementById('galleryGrid');
+    if (!galleryGrid) return;
+
+    galleryGrid.innerHTML = galleryItems.map(item => `
+        <div class="gallery-item">
+            <img src="${item.image}" alt="${item.title}" loading="lazy" onerror="this.src='https://via.placeholder.com/300x300'">
+            <div class="gallery-overlay">
+                <span>${item.title}</span>
+            </div>
+        </div>
+    `).join('');
+}
+
+// ============================================
+// Contact Form Handling (ملغى - مستبدل بنموذج الحجز)
+// ============================================
+// ملاحظة: تم إلغاء هذا الجزء لأننا استبدلناه بنموذج الحجز الجديد
+// const contactForm = document.getElementById('contactForm');
+// if (contactForm) {
+//     contactForm.addEventListener('submit', (e) => {
+//         e.preventDefault();
+//         alert('Thank you for your message! We will get back to you soon. (Demo Mode)');
+//         contactForm.reset();
+//     });
+// }
+
+// ============================================
+// Reservation Form Functionality (الجديد)
+// ============================================
+function initializeReservationForm() {
+    const reservationForm = document.getElementById('reservationForm');
+    if (!reservationForm) return;
+
+    // Set minimum date to today
+    const today = new Date().toISOString().split('T')[0];
+    const dateInput = document.getElementById('resDate');
+    if (dateInput) {
+        dateInput.min = today;
+        
+        // Set default date to tomorrow
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        dateInput.value = tomorrow.toISOString().split('T')[0];
+    }
+
+    // Set default time to 19:00 (7 PM)
+    const timeInput = document.getElementById('resTime');
+    if (timeInput) {
+        timeInput.value = '19:00';
+    }
+
+    // Handle form submission
+    reservationForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        // Get form values
+        const name = document.getElementById('resName').value;
+        const email = document.getElementById('resEmail').value;
+        const phone = document.getElementById('resPhone').value;
+        const guests = document.getElementById('resGuests').value;
+        const date = document.getElementById('resDate').value;
+        const time = document.getElementById('resTime').value;
+        const occasion = document.getElementById('resOccasion').value;
+        const requests = document.getElementById('resRequests').value;
+        const newsletter = document.getElementById('resNewsletter').checked;
+
+        // Validate form
+        if (!name || !email || !phone || !guests || !date || !time) {
+            alert('Please fill in all required fields');
+            return;
+        }
+
+        // Email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            alert('Please enter a valid email address');
+            return;
+        }
+
+        // Phone validation (Moroccan phone number)
+        const phoneRegex = /^(\+212|0)[5-7]\d{8}$/;
+        if (!phoneRegex.test(phone)) {
+            alert('Please enter a valid Moroccan phone number (e.g., 0612345678 or +212612345678)');
+            return;
+        }
+
+        // Format date for display
+        const formattedDate = new Date(date).toLocaleDateString('en-US', {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+
+        // Create reservation message for WhatsApp
+        let reservationMessage = `🍽️ *New Table Reservation - Dar Tlaytmas*\n\n`;
+        reservationMessage += `👤 *Name:* ${name}\n`;
+        reservationMessage += `📧 *Email:* ${email}\n`;
+        reservationMessage += `📞 *Phone:* ${phone}\n`;
+        reservationMessage += `👥 *Guests:* ${guests} ${guests == 1 ? 'person' : 'people'}\n`;
+        reservationMessage += `📅 *Date:* ${formattedDate}\n`;
+        reservationMessage += `⏰ *Time:* ${time}\n`;
+        
+        if (occasion && occasion !== '') {
+            reservationMessage += `🎉 *Occasion:* ${occasion.charAt(0).toUpperCase() + occasion.slice(1)}\n`;
+        }
+        
+        if (requests) {
+            reservationMessage += `📝 *Special Requests:* ${requests}\n`;
+        }
+        
+        reservationMessage += `📱 *WhatsApp Updates:* ${newsletter ? 'Yes' : 'No'}\n`;
+        
+        reservationMessage += `\n⏱️ *Please confirm this reservation within 30 minutes*`;
+        reservationMessage += `\n📍 *Location:* Agadir, Morocco`;
+        reservationMessage += `\n✅ Thank you for choosing Dar Tlaytmas!`;
+
+        // Send via WhatsApp
+        const phoneNumber = '212600000000'; // غير الرقم هنا
+        const encodedMessage = encodeURIComponent(reservationMessage);
+        const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+        
+        // Open WhatsApp
+        window.open(whatsappUrl, '_blank');
+
+        // Show success message
+        showNotification('Reservation request sent! Check WhatsApp to confirm.', 'success');
+
+        // Reset form but keep default values
+        reservationForm.reset();
+        
+        // Reset date and time to defaults
+        if (dateInput) {
+            const tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            dateInput.value = tomorrow.toISOString().split('T')[0];
+        }
+        if (timeInput) {
+            timeInput.value = '19:00';
+        }
+    });
+
+    // Add real-time validation for phone number
+    const phoneInput = document.getElementById('resPhone');
+    if (phoneInput) {
+        phoneInput.addEventListener('input', (e) => {
+            let value = e.target.value;
+            // Remove any non-digit characters except +
+            value = value.replace(/[^\d+]/g, '');
+            
+            // Format for Moroccan numbers
+            if (value.startsWith('+212')) {
+                if (value.length > 13) value = value.slice(0, 13);
+            } else if (value.startsWith('0')) {
+                if (value.length > 10) value = value.slice(0, 10);
+            } else {
+                if (value.length > 9) value = value.slice(0, 9);
+            }
+            
+            e.target.value = value;
+        });
+    }
+
+    // Validate date (cannot be in the past)
+    if (dateInput) {
+        dateInput.addEventListener('change', (e) => {
+            const selectedDate = new Date(e.target.value);
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            
+            if (selectedDate < today) {
+                alert('Please select a future date');
+                const tomorrow = new Date();
+                tomorrow.setDate(tomorrow.getDate() + 1);
+                dateInput.value = tomorrow.toISOString().split('T')[0];
+            }
+        });
+    }
+
+    // Validate time (between 12:00 and 23:00)
+    if (timeInput) {
+        timeInput.addEventListener('change', (e) => {
+            const time = e.target.value;
+            const hour = parseInt(time.split(':')[0]);
+            
+            if (hour < 12) {
+                alert('Restaurant opens at 12:00 PM');
+                timeInput.value = '12:00';
+            } else if (hour > 23) {
+                alert('Restaurant closes at 12:00 AM');
+                timeInput.value = '23:00';
+            }
+        });
     }
 }
-/* تنسيق أيقونة السلة في شريط التنقل */
-.cart-icon-nav {
-    display: flex;
-    align-items: center;
-    margin-left: 15px;
+
+// ============================================
+// Active Navigation Link on Scroll
+// ============================================
+function updateActiveNavLink() {
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    
+    let current = '';
+    
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        if (window.scrollY >= sectionTop - 200) {
+            current = section.getAttribute('id');
+        }
+    });
+
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${current}`) {
+            link.classList.add('active');
+        }
+    });
 }
 
-.cart-icon-nav a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 8px !important;
-    color: var(--text-color);
-    font-size: 1.2rem;
-    transition: color 0.3s ease;
+// ============================================
+// Smooth scrolling for navigation links
+// ============================================
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
+});
+
+// ============================================
+// Initialize everything
+// ============================================
+document.addEventListener('DOMContentLoaded', () => {
+    loadMenuItems();
+    loadGalleryItems();
+    loadCart();
+    
+    // ✅ تفعيل نموذج الحجز الجديد
+    initializeReservationForm();
+    
+    window.addEventListener('scroll', updateActiveNavLink);
+    updateActiveNavLink();
+});
+
+// ============================================
+// Lazy loading for images
+// ============================================
+if ('loading' in HTMLImageElement.prototype) {
+    const images = document.querySelectorAll('img[loading="lazy"]');
+    images.forEach(img => {
+        img.loading = 'lazy';
+    });
+} else {
+    const script = document.createElement('script');
+    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js';
+    document.body.appendChild(script);
 }
 
-.cart-icon-nav a:hover {
-    color: var(--primary-color);
-}
-
-/* إخفاء الخط السفلي تحت أيقونة السلة */
-.cart-icon-nav a::after {
-    display: none !important;
-}
-
-/* تعديل موضع العداد */
-.cart-icon-nav #cartCount {
-    position: absolute;
-    top: -5px;
-    right: -5px;
-    background: var(--primary-color);
-    color: white;
-    border-radius: 50%;
-    padding: 2px 6px;
-    font-size: 0.7rem;
-    font-weight: 600;
-}
-
-/* للشاشات الصغيرة */
-@media (max-width: 768px) {
-    .cart-icon-nav {
-        margin-left: 0;
-        margin-top: 10px;
-        justify-content: flex-start;
+// ============================================
+// Animation styles
+// ============================================
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes slideInRight {
+        from {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
     }
     
-    .cart-icon-nav a {
-        justify-content: flex-start;
-        padding: 10px 0 !important;
+    @keyframes slideOutRight {
+        from {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        to {
+            transform: translateX(100%);
+            opacity: 0;
+        }
     }
-}
-/* Reservation Form Styles */
-.reservation-form {
-    background: var(--white);
-    padding: 40px;
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow);
-}
-
-.reservation-form h3 {
-    font-size: 1.8rem;
-    margin-bottom: 30px;
-    color: var(--text-color);
-    font-family: 'Playfair Display', serif;
-}
-
-.reservation-form .form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    margin-bottom: 20px;
-}
-
-.reservation-form .form-group {
-    margin-bottom: 20px;
-}
-
-.reservation-form input,
-.reservation-form select,
-.reservation-form textarea {
-    width: 100%;
-    padding: 14px 15px;
-    border: 1px solid #e0e0e0;
-    border-radius: 10px;
-    font-family: 'Inter', sans-serif;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-    background-color: var(--white);
-}
-
-.reservation-form input:focus,
-.reservation-form select:focus,
-.reservation-form textarea:focus {
-    outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(248, 176, 66, 0.1);
-}
-
-.reservation-form input[type="date"],
-.reservation-form input[type="time"] {
-    cursor: pointer;
-}
-
-/* Checkbox Group */
-.checkbox-group {
-    margin: 20px 0;
-}
-
-.checkbox-group label {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    color: var(--light-text);
-    cursor: pointer;
-    font-size: 0.95rem;
-}
-
-.checkbox-group input[type="checkbox"] {
-    width: 18px;
-    height: 18px;
-    cursor: pointer;
-    accent-color: var(--primary-color);
-}
-
-/* Restaurant Info Card */
-.restaurant-info-card {
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-    color: white;
-    padding: 25px;
-    border-radius: var(--border-radius);
-    margin-top: 30px;
-    box-shadow: var(--shadow);
-}
-
-.restaurant-info-card h4 {
-    font-size: 1.3rem;
-    margin-bottom: 15px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.restaurant-info-card h4 i {
-    font-size: 1.5rem;
-}
-
-.restaurant-info-card p {
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 0.95rem;
-    opacity: 0.95;
-}
-
-.restaurant-info-card p::before {
-    content: "•";
-    font-size: 1.2rem;
-    color: white;
-}
-
-/* Quick Booking Section */
-.quick-booking {
-    margin-top: 25px;
-    padding-top: 20px;
-    border-top: 1px solid #eee;
-    text-align: center;
-}
-
-.quick-booking p {
-    color: var(--light-text);
-    margin-bottom: 15px;
-    font-size: 0.95rem;
-}
-
-.quick-booking .btn-outline {
-    border-color: #25D366;
-    color: #25D366;
-}
-
-.quick-booking .btn-outline:hover {
-    background-color: #25D366;
-    color: white;
-    border-color: #25D366;
-}
-
-/* تعديلات للشاشات الصغيرة */
-@media (max-width: 768px) {
-    .reservation-form .form-row {
-        grid-template-columns: 1fr;
-        gap: 0;
-    }
-    
-    .restaurant-info-card {
-        margin-top: 20px;
-        padding: 20px;
-    }
-    
-    .reservation-form {
-        padding: 25px;
-    }
-}
-
-/* تنسيقات إضافية */
-.reservation-form select {
-    appearance: none;
-    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-    background-repeat: no-repeat;
-    background-position: right 1rem center;
-    background-size: 1em;
-}
-
-.reservation-form select::-ms-expand {
-    display: none;
-}
-
-/* تنسيق التاريخ والوقت */
-.reservation-form input[type="date"]::-webkit-calendar-picker-indicator,
-.reservation-form input[type="time"]::-webkit-calendar-picker-indicator {
-    cursor: pointer;
-    opacity: 0.6;
-    filter: invert(0.5);
-}
-
-.reservation-form input[type="date"]::-webkit-calendar-picker-indicator:hover,
-.reservation-form input[type="time"]::-webkit-calendar-picker-indicator:hover {
-    opacity: 1;
-}
+`;
+document.head.appendChild(style);
 
