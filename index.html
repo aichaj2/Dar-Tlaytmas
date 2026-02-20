@@ -123,17 +123,17 @@
         </div>
     </section>
 
-     <!-- Contact Section -->
+    <!-- Contact Section -->
     <section id="contact" class="contact section bg-light">
         <div class="container">
-            <h2 class="section-title">Contact Us</h2>
+            <h2 class="section-title">Book a Table</h2>
             <div class="contact-content">
                 <div class="contact-info">
                     <div class="contact-item">
                         <i class="fas fa-map-marker-alt"></i>
                         <div>
                             <h3>Address</h3>
-                            <p>agadir, Morocco</p>
+                            <p>Agadir, Morocco</p>
                         </div>
                     </div>
                     <div class="contact-item">
@@ -157,24 +157,94 @@
                             <p>reservations@dartlatwnas.ma</p>
                         </div>
                     </div>
+                
+                    <!-- Restaurant Info Card -->
+                    <div class="restaurant-info-card">
+                        <h4><i class="fas fa-info-circle"></i> Reservation Info</h4>
+                        <p>✓ Free cancellation up to 2 hours before</p>
+                        <p>✓ Maximum group size: 10 people</p>
+                        <p>✓ Special requests available</p>
+                        <p>✓ We accept cash and credit cards</p>
+                    </div>
                 </div>
-                <div class="contact-form">
-                    <h3>Send us a Message</h3>
-                    <form id="contactForm">
-                        <div class="form-group">
-                            <input type="text" id="name" placeholder="Your Name" required>
+            
+                <!-- Reservation Form (بدلاً من Contact Form) -->
+                <div class="reservation-form">
+                    <h3>Make a Reservation</h3>
+                    <form id="reservationForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <input type="text" id="resName" placeholder="Your Full Name" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" id="resEmail" placeholder="Your Email" required>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <input type="email" id="email" placeholder="Your Email" required>
+                    
+                        <div class="form-row">
+                            <div class="form-group">
+                                <input type="tel" id="resPhone" placeholder="Phone Number" required>
+                            </div>
+                            <div class="form-group">
+                                <select id="resGuests" required>
+                                    <option value="" disabled selected>Number of Guests</option>
+                                    <option value="1">1 Person</option>
+                                    <option value="2">2 People</option>
+                                    <option value="3">3 People</option>
+                                    <option value="4">4 People</option>
+                                    <option value="5">5 People</option>
+                                    <option value="6">6 People</option>
+                                    <option value="7">7 People</option>
+                                    <option value="8">8 People</option>
+                                    <option value="9">9 People</option>
+                                    <option value="10">10 People</option>
+                                </select>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <input type="text" id="subject" placeholder="Subject">
+                    
+                        <div class="form-row">
+                            <div class="form-group">
+                                <input type="date" id="resDate" required min="">
+                            </div>
+                            <div class="form-group">
+                                <input type="time" id="resTime" required>
+                            </div>
                         </div>
+                    
                         <div class="form-group">
-                            <textarea id="message" placeholder="Your Message" rows="5" required></textarea>
+                            <select id="resOccasion">
+                                <option value="" disabled selected>Special Occasion (Optional)</option>
+                                <option value="birthday">Birthday</option>
+                                <option value="anniversary">Anniversary</option>
+                                <option value="business">Business Meeting</option>
+                                <option value="date">Romantic Date</option>
+                                <option value="other">Other</option>
+                            </select>
                         </div>
-                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    
+                        <div class="form-group">
+                            <textarea id="resRequests" placeholder="Special Requests (Allergies, Preferences, etc.)" rows="3"></textarea>
+                        </div>
+                    
+                        <div class="form-group checkbox-group">
+                            <label>
+                                <input type="checkbox" id="resNewsletter"> 
+                                I want to receive offers and updates via WhatsApp
+                            </label>
+                        </div>
+                    
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">
+                            <i class="fas fa-calendar-check"></i> Confirm Reservation
+                        </button>
                     </form>
+                
+                    <!-- WhatsApp Button for Quick Booking -->
+                    <div class="quick-booking">
+                        <p>Or book directly via WhatsApp:</p>
+                        <a href="https://wa.me/212600000000?text=Hello%2C%20I%20want%20to%20book%20a%20table" target="_blank" class="btn btn-outline" style="width: 100%;">
+                            <i class="fab fa-whatsapp"></i> WhatsApp Booking
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -214,7 +284,7 @@
         </div>
     </footer>
 
-    <!-- NEW: Cart Modal (نافذة السلة المنبثقة) -->
+    <!-- Cart Modal (نافذة السلة المنبثقة) -->
     <div id="cartModal" class="modal">
         <div class="modal-content">
             <span class="close-modal">&times;</span>
@@ -224,13 +294,40 @@
                 <p style="text-align: center; color: var(--light-text);">Your cart is empty.</p>
             </div>
             <div class="cart-total">
+                <h3>Subtotal: <span id="cartSubtotal">0.00</span> MAD</h3>
+                <h3>Delivery: <span id="deliveryFee">15.00</span> MAD</h3>
                 <h3>Total: <span id="cartTotal">0.00</span> MAD</h3>
             </div>
-            <button id="checkoutBtn" class="btn btn-primary" style="width: 100%;">Proceed to Checkout</button>
-        </div>
+        
+            <!-- Checkout Form (يظهر تحت السلة) -->
+            <div id="checkoutForm" style="display: none;">
+                <h3>Delivery Information</h3>
+                <form id="deliveryForm">
+                    <div class="form-group">
+                        <input type="text" id="customerName" placeholder="Your Full Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" id="customerPhone" placeholder="Phone Number" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="customerAddress" placeholder="Delivery Address" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="orderNotes" placeholder="Additional Notes (optional)" rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">
+                        <i class="fab fa-whatsapp"></i> Send Order via WhatsApp
+                    </button>
+                </form>
+            </div>
+        
+            <!-- الأزرار -->
+            <button id="checkoutBtn" class="btn btn-primary" style="width: 100%; margin-top: 15px;">Proceed to Checkout</button>
+            <button id="backToCartBtn" class="btn btn-outline" style="width: 100%; margin-top: 10px; display: none;">Back to Cart</button>
+            </div>
     </div>
 
     <!-- JavaScript file -->
     <script src="script.js"></script>
 </body>
-</html> 
+</html>
