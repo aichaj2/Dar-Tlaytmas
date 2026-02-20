@@ -126,7 +126,7 @@
     <!-- Contact Section -->
     <section id="contact" class="contact section bg-light">
         <div class="container">
-            <h2 class="section-title">Book a Table</h2>
+            <h2 class="section-title">Contact Us</h2>
             <div class="contact-content">
                 <div class="contact-info">
                     <div class="contact-item">
@@ -165,87 +165,83 @@
                         <p>✓ Maximum group size: 10 people</p>
                         <p>✓ Special requests available</p>
                         <p>✓ We accept cash and credit cards</p>
+                        <p>✓ Welcome to Dar Tlaytmas</p>
                     </div>
                 </div>
-            
-                <!-- Reservation Form (بدلاً من Contact Form) -->
                 <div class="reservation-form">
-                    <h3>Make a Reservation</h3>
-                    <form id="reservationForm">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <input type="text" id="resName" placeholder="Your Full Name" required>
-                            </div>
-                            <div class="form-group">
-                                <input type="email" id="resEmail" placeholder="Your Email" required>
-                            </div>
-                        </div>
-                    
-                        <div class="form-row">
-                            <div class="form-group">
-                                <input type="tel" id="resPhone" placeholder="Phone Number" required>
-                            </div>
-                            <div class="form-group">
-                                <select id="resGuests" required>
-                                    <option value="" disabled selected>Number of Guests</option>
-                                    <option value="1">1 Person</option>
-                                    <option value="2">2 People</option>
-                                    <option value="3">3 People</option>
-                                    <option value="4">4 People</option>
-                                    <option value="5">5 People</option>
-                                    <option value="6">6 People</option>
-                                    <option value="7">7 People</option>
-                                    <option value="8">8 People</option>
-                                    <option value="9">9 People</option>
-                                    <option value="10">10 People</option>
-                                </select>
-                            </div>
-                        </div>
-                    
-                        <div class="form-row">
-                            <div class="form-group">
-                                <input type="date" id="resDate" required min="">
-                            </div>
-                            <div class="form-group">
-                                <input type="time" id="resTime" required>
-                            </div>
-                        </div>
-                    
-                        <div class="form-group">
-                            <select id="resOccasion">
-                                <option value="" disabled selected>Special Occasion (Optional)</option>
-                                <option value="birthday">Birthday</option>
-                                <option value="anniversary">Anniversary</option>
-                                <option value="business">Business Meeting</option>
-                                <option value="date">Romantic Date</option>
-                                <option value="other">Other</option>
-                            </select>
-                        </div>
-                    
-                        <div class="form-group">
-                            <textarea id="resRequests" placeholder="Special Requests (Allergies, Preferences, etc.)" rows="3"></textarea>
-                        </div>
-                    
-                        <div class="form-group checkbox-group">
-                            <label>
-                                <input type="checkbox" id="resNewsletter"> 
-                                I want to receive offers and updates via WhatsApp
-                            </label>
-                        </div>
-                    
-                        <button type="submit" class="btn btn-primary" style="width: 100%;">
-                            <i class="fas fa-calendar-check"></i> Confirm Reservation
-                        </button>
-                    </form>
+  <h3>Make a Reservation</h3>
+
+  <form action="https://formspree.io/f/mkovvagp" method="POST">
+
+    <div class="form-row">
+      <div class="form-group">
+        <input type="text" name="name" placeholder="Your Full Name" required>
+      </div>
+
+      <div class="form-group">
+        <input type="email" name="email" placeholder="Your Email" required>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <input type="tel" name="phone" placeholder="Phone Number" required>
+      </div>
+
+      <div class="form-group">
+        <select name="guests" required>
+          <option value="" disabled selected>Number of Guests</option>
+          <option>1 Person</option>
+          <option>2 People</option>
+          <option>3 People</option>
+          <option>4 People</option>
+          <option>5 People</option>
+          <option>6 People</option>
+          <option>7 People</option>
+          <option>8 People</option>
+          <option>9 People</option>
+          <option>10 People</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <input type="date" name="date" required>
+      </div>
+
+      <div class="form-group">
+        <input type="time" name="time" required>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <select name="occasion">
+        <option value="" disabled selected>Special Occasion (Optional)</option>
+        <option>Birthday</option>
+        <option>Anniversary</option>
+        <option>Business Meeting</option>
+        <option>Romantic Date</option>
+        <option>Other</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <textarea name="requests" rows="3"
+        placeholder="Special Requests (Allergies, Preferences, etc.)"></textarea>
+    </div>
+
+    <div class="form-group checkbox-group">
+      
+    </div>
+
+    <button type="submit" class="btn btn-primary" style="width:100%;">
+      <i class="fas fa-calendar-check"></i> Confirm Reservation
+    </button>
+
+  </form>
+</div>
                 
-                    <!-- WhatsApp Button for Quick Booking -->
-                    <div class="quick-booking">
-                        <p>Or book directly via WhatsApp:</p>
-                        <a href="https://wa.me/212600000000?text=Hello%2C%20I%20want%20to%20book%20a%20table" target="_blank" class="btn btn-outline" style="width: 100%;">
-                            <i class="fab fa-whatsapp"></i> WhatsApp Booking
-                        </a>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
@@ -261,10 +257,8 @@
                 <div class="footer-section">
                     <h3>Quick Links</h3>
                     <ul>
-                        <li><a href="#home">Home</a></li>
                         <li><a href="#about">About Us</a></li>
                         <li><a href="#menu">Menu</a></li>
-                        <li><a href="#gallery">Gallery</a></li>
                         <li><a href="#contact">Contact</a></li>
                     </ul>
                 </div>
@@ -274,7 +268,6 @@
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
                         <a href="#"><i class="fab fa-instagram"></i></a>
                         <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
             </div>
@@ -331,3 +324,4 @@
     <script src="script.js"></script>
 </body>
 </html>
+
